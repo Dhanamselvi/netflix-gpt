@@ -1,6 +1,8 @@
 import Home from "./Home"
 import {useRef, useState} from "react"
 import {checkValidaData} from "../utils/validate"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () =>{
     const [isSignIn, setIsSignIn] = useState(true);
@@ -15,18 +17,44 @@ const Login = () =>{
 
     const handleButtonClick = () =>{
         // validate the  form data
-        console.log(email.current.value, password.current.value);
         const message = checkValidaData(email.current.value, password.current.value);
         setErrorMessage(message);
-
+        if(message) return;
+        
         // Sign In or Sign Up
+        
+        if(!isSignIn){
+            // Sign Up Logic
+            createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log(user)
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setErrorMessage(errorCode + " : " + errorMessage);
+            });
+        }else{
+            // Sign In Logic
+            signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log(user)
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setErrorMessage(errorCode + " : " + errorMessage)
+            });
+        }
     }
 
     return(
         <div>
             <Home/>
-            <img src="https://assets.nflxext.com/ffe/siteui/vlv3/f6e7f6df-6973-46ef-b98f-12560d2b3c69/web/IN-en-20250317-TRIFECTA-perspective_26f87873-6014-460d-a6fb-1d96d85ffe5f_small.jpg"
-                    alt="BackgroundImage"
+            <img src="../assets/BG_LOGO.jpg"
+                 alt="BackgroundImage"
             />
             <form onSubmit={(e)=>e.preventDefault()}
                   className="absolute 

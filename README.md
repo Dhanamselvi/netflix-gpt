@@ -24,3 +24,7 @@
 - NetflixGPT
     - Search Bar
     - Movie Suggestion
+
+    // Firebase Login Details
+    email = selvirenuga92@gmail.com
+    password = Selvi1992
