@@ -35,3 +35,18 @@
     // Firebase Login Details
     email = selvirenuga92@gmail.com
     password = Selvi1992
+
+    # TMDB API(The Movie Database)
+    - Go to TMDB website
+    - Click join TMDB
+    - Login
+    - Click on Edit profile
+    - Click on API
+    - Click on Request an API Key
+    - Fill the datas
+    - Find API Key and API Access Token
+
+    # TMDB Details
+    - User Name : SelviRenuga
+    - Password : S@lvi1992
+    - Application URL : https://www.selvi.com
